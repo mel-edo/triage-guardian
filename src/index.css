@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Advanced AI Hospital Triage System Design Tokens */
+
+@layer base {
+  :root {
+    /* Core Background & Text */
+    --background: 0 0% 100%;
+    --foreground: 210 15% 20%;
+
+    /* Medical Theme Colors */
+    --primary: 217 89% 61%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 89% 70%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 210 15% 20%;
+
+    --accent: 200 89% 61%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Medical Status Colors */
+    --critical: 0 84% 60%;
+    --critical-foreground: 0 0% 100%;
+    --warning: 43 89% 60%;
+    --warning-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --emergency: 0 100% 50%;
+    --emergency-foreground: 0 0% 100%;
+
+    /* UI Elements */
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 20%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 89% 61%;
+    
+    /* Gradient Definitions */
+    --gradient-primary: linear-gradient(135deg, hsl(217, 89%, 61%), hsl(245, 89%, 61%));
+    --gradient-medical: linear-gradient(135deg, hsl(217, 89%, 61%), hsl(245, 58%, 51%), hsl(310, 89%, 79%));
+    --gradient-emergency: linear-gradient(135deg, hsl(0, 84%, 60%), hsl(0, 100%, 45%));
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    
+    /* Shadows */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+
+    /* Animation Durations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 210 15% 5%;
+    --foreground: 0 0% 95%;
+    --card: 210 15% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 210 15% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 217 89% 70%;
+    --primary-foreground: 210 15% 5%;
+    --secondary: 210 15% 12%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 210 15% 12%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 200 89% 70%;
+    --accent-foreground: 210 15% 5%;
+    --border: 210 15% 15%;
+    --input: 210 15% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: linear-gradient(135deg, hsl(217, 89%, 61%) 0%, hsl(245, 58%, 51%) 50%, hsl(310, 89%, 79%) 100%);
+    min-height: 100vh;
+  }
+
+  /* Glassmorphism Effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Animation Classes */
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.5s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 0 0 hsla(var(--primary), 0.7);
+  }
+  to {
+    box-shadow: 0 0 0 10px hsla(var(--primary), 0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
