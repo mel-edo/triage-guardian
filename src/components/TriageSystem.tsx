@@ -291,7 +291,7 @@ export const TriageSystem = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-medical p-4">
+    <div className="min-h-screen bg-background p-4">
       <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr_300px] gap-4 h-screen max-w-7xl mx-auto">
         {/* Header - Mobile */}
         <div className="lg:hidden glass rounded-xl p-4 flex items-center justify-between shadow-glass">
@@ -559,7 +559,7 @@ export const TriageSystem = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-success">
-                  {patients.length > 0 ? Math.round(patients.reduce((acc, p) => acc + p.estimatedWaitTime, 0) / patients.length) : 0}
+                  {patients.length > 0 ? Math.round(patients.reduce((acc, p) => acc + (p.estimatedWaitTime || 0), 0) / patients.length) : 0}
                 </div>
                 <div className="text-xs text-muted-foreground uppercase tracking-wide">Avg Wait (min)</div>
               </div>

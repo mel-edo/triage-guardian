@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Core Background & Text */
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 210 15% 20%;
 
     /* Medical Theme Colors */
@@ -88,7 +88,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background: linear-gradient(135deg, hsl(217, 89%, 61%) 0%, hsl(245, 58%, 51%) 50%, hsl(310, 89%, 79%) 100%);
+    background: linear-gradient(to bottom, hsl(210, 40%, 98%), hsl(210, 40%, 96%));
     min-height: 100vh;
   }
 
@@ -174,5 +174,6 @@
 
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(to bottom, hsl(210, 40%, 98%), hsl(210, 40%, 96%)) !important;
   }
 }

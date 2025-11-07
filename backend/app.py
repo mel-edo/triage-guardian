@@ -100,6 +100,27 @@ def add_patient():
     patient_data = request.json
     patient_data['priority'] = calculate_priority_fuzzy(patient_data.get('symptoms', {}))
     patient_data['id'] = f"PAT-{len(patients) + 1}"
+    
+    # Calculate estimated wait time based on priority and patients ahead
+    priority = patient_data['priority']
+    # Count patients with higher or equal priority who are waiting or in-progress
+    patients_ahead = len([p for p in patients 
+                          if p.get('priority', 99) <= priority 
+                          and p.get('status') in ['waiting', 'in-progress']])
+    
+    # Base wait time per priority level (in minutes)
+    base_wait_times = {
+        1: 5,   # Critical - 5 min
+        2: 15,  # High - 15 min
+        3: 30,  # Medium - 30 min
+        4: 45,  # Low - 45 min
+        5: 60   # Routine - 60 min
+    }
+    
+    # Estimated wait time: base time + (patients ahead * average treatment time)
+    avg_treatment_time = 20  # minutes per patient
+    patient_data['estimatedWaitTime'] = base_wait_times.get(priority, 30) + (patients_ahead * avg_treatment_time)
+    
     patients.append(patient_data)
     return jsonify(patient_data), 201
 
@@ -121,8 +142,12 @@ def get_analytics():
     in_progress_patients = len([p for p in patients if p.get('status') == 'in-progress'])
     waiting_patients = len([p for p in patients if p.get('status') == 'waiting'])
 
-    # This is a simplified avg_wait_time. A more accurate calculation would need to store arrival times.
-    avg_wait_time = 0
+    # Calculate average wait time from all patients
+    if patients:
+        total_wait = sum(p.get('estimatedWaitTime', 0) for p in patients)
+        avg_wait_time = round(total_wait / len(patients))
+    else:
+        avg_wait_time = 0
 
     priority_data = [{'priority': f'Priority {i}', 'count': len([p for p in patients if p.get('priority') == i])} for i in range(1, 6)]
 
